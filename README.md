@@ -51,7 +51,7 @@ The backend of the Movie Review App is built with Spring Boot and MongoDB. It se
      ```
      or run the `main` method in the IDE.
 
-5. API will be available at `http://localhost:8080`.
+5. API will be available at `https://2c4d6b77e14c.ngrok.app`.
 
 ## API Endpoints
 ### Movies
