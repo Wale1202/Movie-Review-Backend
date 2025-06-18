@@ -19,6 +19,8 @@ public class Movie {
     private ObjectId id;
     private String imdbId;
     private String title;
+    private String description;
+    private Integer year;
     private String releaseDate;
     private String trailerLink;
     private String poster;
@@ -95,5 +97,21 @@ public class Movie {
 
     public void setReviewIds(List<Review> reviewIds) {
         this.reviewIds = reviewIds;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import jakarta.validation.Valid;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,17 +30,19 @@ public class MovieController {
 
 
     @PostMapping
-    public ResponseEntity<Object> createMovie(@RequestBody Movie movie) {
-        try {
+    public ResponseEntity<Movie> createMovie(@Valid @RequestBody MovieRequest movieRequest) {
+            Movie movie = new Movie();
+            movie.setTitle(movieRequest.getTitle());
+            movie.setDescription(movieRequest.getDescription());
+            movie.setYear(movieRequest.getYear());
+            movie.setGenres(movieRequest.getGenres());
+            movie.setPoster(movieRequest.getPoster());
+
             Movie savedMovie = movieService.addMovie(movie);
             return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);
-        }catch(ResponseStatusException e){
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("error", e.getReason());
-            return ResponseEntity.status(e.getStatusCode()).body(errorResponse);
 
         }
         //return new ResponseEntity<>(movieService.addMovie(movie), HttpStatus.CREATED);
     }
 
-}
+
