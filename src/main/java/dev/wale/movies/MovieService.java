@@ -20,4 +20,7 @@ public class MovieService {
    public Optional<Movie> singleMovie(String imdbId){
         return movieRepository.findMovieByImdbId(imdbId);
    }
+    public Movie addMovie(Movie movie){
+        return movieRepository.save(movie);
+    }
 }
