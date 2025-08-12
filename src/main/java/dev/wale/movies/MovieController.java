@@ -20,6 +20,7 @@ public class MovieController {
     private MovieService movieService;
     @GetMapping
     public ResponseEntity<List<Movie>> getAllMovies(){
+        System.out.println(movieService.allMovies().size());
         return new ResponseEntity<List<Movie>>(movieService.allMovies(), HttpStatus.OK);
     }
 
