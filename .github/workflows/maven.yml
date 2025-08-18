@@ -36,7 +36,7 @@ jobs:
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
-          image: repo/movie-review-project
+          image: movie-review-project/movie-review-project
           tags: latest
           registry: docker.io
           dockerfile: Dockerfile
