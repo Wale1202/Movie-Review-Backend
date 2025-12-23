@@ -28,9 +28,18 @@ public class Review {
         this.id = id;
     }
 
+    private String userId;
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     private String body;
+
 
     public Review(String body) {
         this.body = body;

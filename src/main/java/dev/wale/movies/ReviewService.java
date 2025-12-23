@@ -23,7 +23,7 @@ public class ReviewService {
     public List<Review> getAllReviews() {
         return reviewRepository.findAll();
     }
-    public Review createReview(String reviewBody, String imdbId){
+    public Review createReview(String reviewBody, String imdbId, String userId){
         Review review = reviewRepository.insert(new Review(reviewBody));
 
         mongoTemplate.update(Movie.class)
