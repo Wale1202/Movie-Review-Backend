@@ -21,6 +21,12 @@ public class MovieService {
         return movieRepository.findMovieByImdbId(imdbId);
    }
     public Movie addMovie(Movie movie){
+        Optional<Movie> exists = movieRepository.findMovieByTitle( movie.getTitle());
+
+        if(exists.isPresent()){
+            throw new Error("Invalid title");
+        }
+
         return movieRepository.save(movie);
     }
 }

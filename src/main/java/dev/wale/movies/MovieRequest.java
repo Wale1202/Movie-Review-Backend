@@ -9,7 +9,7 @@ public class MovieRequest {
     private String description;
     @NotNull(message = "Year is required")
     @Min(value = 1900, message = "Year must not be before 1900")
-    @Max(value = 2025, message = "Year cannot be in the future")
+    @Max(value = 2026, message = "Year cannot be in the future")
     private Integer year;
     @NotEmpty(message = "At least one genre is required")
     private List<@Pattern(regexp = "Action|Comedy|Drama|Horror|Science Fiction|Adventure|", message = "Genre must be Action, Comedy etc")String > genres;
