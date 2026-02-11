@@ -1,4 +1,4 @@
-FROM openjdk:21
+FROM eclipse-temurin:21-jdk
 EXPOSE 8081
-ADD target/movie-review-project.jar movie-review-project.jar
+COPY target/movie-review-project.jar app.jar
 ENTRYPOINT ["java", "-jar", "/movie-review-project.jar"]
