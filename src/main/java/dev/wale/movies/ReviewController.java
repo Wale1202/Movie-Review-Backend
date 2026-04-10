@@ -28,5 +28,10 @@ public class ReviewController {
         String userId = jwt.getSubject();
         return new ResponseEntity<Review>(reviewService.createReview(payload.get("reviewBody"), payload.get("imdbId"), userId), HttpStatus.CREATED);
     }
-    @DeleteMa
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteReview(@PathVariable String id, @RequestBody Map<String, String> payload, @AuthenticationPrincipal Jwt jwt){
+        String userId = jwt.getSubject();
+        reviewService.deleteReview(id, payload.get("imdbId"), userId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
