@@ -28,4 +28,5 @@ public class ReviewController {
         String userId = jwt.getSubject();
         return new ResponseEntity<Review>(reviewService.createReview(payload.get("reviewBody"), payload.get("imdbId"), userId), HttpStatus.CREATED);
     }
+    @DeleteMa
 }

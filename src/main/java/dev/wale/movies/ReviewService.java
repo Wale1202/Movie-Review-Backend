@@ -36,6 +36,12 @@ public class ReviewService {
         return review;
     }
     public void deleteReview(String reviewId, String imdbId, String userId){
+        Review review = reviewRepository.findById(new ObjectId(reviewId))
+                .orElseThrow(() -> new RuntimeException("Review not Found"));
+        
+        if(!review.getUserId().equals(userId)){
+            throw new RuntimeException("You are not authorized to delete this review");
+        }
         reviewRepository.deleteById(new ObjectId(reviewId));
 
         mongoTemplate.update(Movie.class)
