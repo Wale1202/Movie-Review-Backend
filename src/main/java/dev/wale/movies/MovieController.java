@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/movies")
 public class MovieController {
-    @Autowired
+    @Autowired 
     private MovieService movieService;
     @GetMapping
     public ResponseEntity<List<Movie>> getAllMovies(){
@@ -44,6 +44,7 @@ public class MovieController {
 
         }
         //return new ResponseEntity<>(movieService.addMovie(movie), HttpStatus.CREATED);
-    }
+
+}
 
 
