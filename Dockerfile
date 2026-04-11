@@ -3,6 +3,7 @@ WORKDIR /app
 
 COPY .mvn/ .mvn/
 COPY mvnw pom.xml ./
+RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline -B
 
 COPY src ./src
@@ -14,7 +15,7 @@ WORKDIR /app
 RUN groupadd --system spring && useradd --system --gid spring spring
 USER spring:spring
 
-COPY --from=build /app/target/movie-review-project.jar app.jar
+COPY --from=build /app/target/movie-review-project.jar /app/app.jar
 
 EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
