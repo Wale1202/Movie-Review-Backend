@@ -18,7 +18,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request){
-        if (userRepository.existByEmail(request.email())){
+        if (userRepository.existsByEmail(request.email())){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already in use");
         }
 
