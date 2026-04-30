@@ -25,11 +25,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 
 public class SecurityConfig {
-    private final JwtAuthFilter jwtAuthFilter;
     private final UserRepository userRepository;
 
 @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    SecurityFilterChain filterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception{
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
