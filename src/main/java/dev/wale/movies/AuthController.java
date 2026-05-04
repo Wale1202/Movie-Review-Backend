@@ -7,7 +7,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.AuthenticationException;
+
 
 
 @RestController
@@ -39,9 +40,13 @@ public class AuthController {
         return ResponseEntity.ok(new AuthResponse(token));
     }
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@ResponseBody RegisterRequest request ){
+    public ResponseEntity<?> login(@RequestBody LoginRequest request ){
+        try{
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
-
+        }
+        catch (AuthenticationException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid email or password");
+        }
         User user = userRepository.findByEmail(request.email()).orElseThrow();
 
         String token = jwtService.generateToken(user);
