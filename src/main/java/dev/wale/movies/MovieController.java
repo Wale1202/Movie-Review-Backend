@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import jakarta.validation.Valid;
@@ -24,6 +25,12 @@ public class MovieController {
         return new ResponseEntity<List<Movie>>(movieService.allMovies(), HttpStatus.OK);
     }
 
+    @GetMapping("/mine")
+    public ResponseEntity<List<Movie>> getMyMovies(@AuthenticationPrincipal User user){
+        List<Movie> movies = movieService.getMoviesByUser(user.getId().toString());
+        return new ResponseEntity<>(movies, HttpStatus.OK);
+    }
+
     @GetMapping("/{imdbId}")
     public ResponseEntity<Optional<Movie>> getSingleMovie(@PathVariable String imdbId){
         return new ResponseEntity<Optional<Movie>>(movieService.singleMovie(imdbId), HttpStatus.OK);
@@ -31,13 +38,14 @@ public class MovieController {
 
 
     @PostMapping
-    public ResponseEntity<Movie> createMovie(@Valid @RequestBody MovieRequest movieRequest) {
+    public ResponseEntity<Movie> createMovie(@Valid @RequestBody MovieRequest movieRequest, @AuthenticationPrincipal User user) {
             Movie movie = new Movie();
             movie.setTitle(movieRequest.getTitle());
             movie.setDescription(movieRequest.getDescription());
             movie.setYear(movieRequest.getYear());
             movie.setGenres(movieRequest.getGenres());
             movie.setPoster(movieRequest.getPoster());
+            movie.setAddedBy(user.getId().toString());
 
             Movie savedMovie = movieService.addMovie(movie);
             return new ResponseEntity<>(savedMovie, HttpStatus.CREATED);

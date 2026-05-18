@@ -29,4 +29,7 @@ public class MovieService {
 
         return movieRepository.save(movie);
     }
+    public List<Movie> getMoviesByUser(String userId){
+        return movieRepository.findByAddedBy(userId);
+    }
 }

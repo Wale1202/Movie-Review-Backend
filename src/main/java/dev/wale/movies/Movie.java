@@ -75,7 +75,13 @@ public class Movie {
     public void setPoster(String poster) {
         this.poster = poster;
     }
-
+    public String getAddedBy(){
+        return addedBy;
+    }
+    public void setAddedBy(String addedBy){
+        this.addedBy = addedBy;
+    }
+    
     public List<String> getGenres() {
         return genres;
     }
