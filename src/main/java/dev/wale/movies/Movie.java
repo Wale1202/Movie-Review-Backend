@@ -24,6 +24,7 @@ public class Movie {
     private String releaseDate;
     private String trailerLink;
     private String poster;
+    private String addedBy;
     private List<String> genres;
     private List<String> backdrops;
     @DocumentReference
@@ -74,7 +75,13 @@ public class Movie {
     public void setPoster(String poster) {
         this.poster = poster;
     }
-
+    public String getAddedBy(){
+        return addedBy;
+    }
+    public void setAddedBy(String addedBy){
+        this.addedBy = addedBy;
+    }
+    
     public List<String> getGenres() {
         return genres;
     }
