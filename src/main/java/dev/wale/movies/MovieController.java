@@ -52,6 +52,11 @@ public class MovieController {
 
         }
         //return new ResponseEntity<>(movieService.addMovie(movie), HttpStatus.CREATED);
+        @DeleteMapping("/{id}")
+        public ResponseEntity<Void> deleteMovie(@PathVariable String id, @AuthenticationPrincipal User user){
+            movieService.deleteMovie(id, user.getId().toString());
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
 
 }
 

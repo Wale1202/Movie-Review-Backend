@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 import java.util.Optional;
 
+import javax.management.RuntimeErrorException;
+
 @Service
 public class MovieService {
     @Autowired
@@ -31,5 +33,14 @@ public class MovieService {
     }
     public List<Movie> getMoviesByUser(String userId){
         return movieRepository.findByAddedBy(userId);
+    }
+    public void deleteMovie(String movieId, String userId){
+        Movie movie = movieRepository.findById(new ObjectId(movieId))
+            .orElseThrow(() -> new RuntimeException("Movie not found"));
+
+        if(!userId.equals(movie.getAddedBy())){
+            throw new RuntimeException("You are not authorized to delete this movie");
+        }
+        movieRepository.deleteById(new ObjectId(movieId));
     }
 }
