@@ -1,7 +1,8 @@
 package dev.wale.movies;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -13,11 +14,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Review {
-
+    @JsonSerialize(using = ToStringSerializer.class)
     @Setter
     @Id
-//    @JsonSerialize(using = ObjectIdSerializer.class)
-//    @JsonDeserialize(using = ObjectIdDeserializer.class)
     private ObjectId id;
 
     public ObjectId getId() {
